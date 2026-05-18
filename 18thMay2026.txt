@@ -1,0 +1,83 @@
+show databases;
+use vitcampus;
+show tables from vitcampus;
+select * from cse;
+desc cse;
+ALTER TABLE CSE ADD(
+sphn int8,sphn2 int8
+);
+insert into cse values(106,'gigaboy',90,'CSE',200,'PAKISTAN');
+ALTER TABLE CSE DROP COLUMN SPHN2;
+
+ALTER TABLE CSE ADD(
+SCOUNTRY VARCHAR(30) DEFAULT 'INDIA'
+);
+
+ALTER TABLE CSE RENAME COLUMN
+SCOUNTRY TO SLOCATION;
+
+TRUNCATE TABLE CSE;
+
+DELETE FROM EEE;
+SELECT * FROM EEE;
+RENAME TABLE EEE TO ECE;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+        
+SELECT * FROM WORKER;
+UPDATE worker SET First_name='Jayanth',Last_name='V' WHERE worker_id=1;
+UPDATE worker SET salary = salary+5000; 
+
+DELETE FROM worker WHERE worker_id=8;
+
+CREATE TABLE class(id int,name varchar(30));
+INSERT INTO class VALUES(5, 'Temp');
+START TRANSACTION;
+UPDATE class SET name = 'Abhijit' WHERE id = '5';
+SAVEPOINT A;
+INSERT INTO class VALUES(6, 'Chris');
+SAVEPOINT B;
+INSERT INTO class VALUES(7, 'Bravo');
+SAVEPOINT C;
+SELECT * FROM class;
+ROLLBACK TO C;
+
+CREATE TABLE WOW( id int);
+START TRANSACTION;
+INSERT INTO WOW values(1);
+SAVEPOINT point_1;
+INSERT INTO WOW values(2);
+SAVEPOINT point_2;
+INSERT INTO WOW VALUES (3);
+SELECT * FROM WOW;
+ROLLBACK TO point_2;
+
+select first_name, salary, department from worker
+where salary > 100000;
+
+select first_name, salary, department from worker
+where salary <= 100000;
+
+select first_name, salary, department from worker
+where salary = 80000;
+
+select first_name, salary, department from worker
+where salary > 100000 and department="admin";
