@@ -1,0 +1,81 @@
+show tables from vitcampus;
+use vitcampus;
+select first_name,department,salary from worker
+where department='admin' or salary>=100000;
+
+select * from worker;
+select worker_id,first_name,department,salary from worker
+where worker_id in (1,6,7);
+select worker_id,first_name,department,salary from worker
+where worker_id not in (1,6,7);
+
+select * from worker
+where salary between 100000 and 300000;
+select * from worker
+where salary not between 100000 and 300000;
+
+select * from worker
+where salary between 100000 and 500000
+and department not in ('hr','admin');
+select * from worker
+where salary between 100000 and 500000
+and department in ('hr','admin');
+
+select * from worker
+where salary not between 100000 and 500000
+and department not in ('hr','admin');
+select * from worker
+where salary not between 100000 and 500000
+and department in ('hr','admin');
+
+drop table worker;
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+SELECT * FROM worker WHERE first_name LIKE '_i__a_';
+SELECT * FROM worker WHERE first_name LIKE 'M%a';
+SELECT * FROM worker WHERE first_name LIKE 'Vi%';
+SELECT * FROM worker WHERE first_name LIKE 'Vi___l';
+#aggregate functions
+select min(salary) from worker where department='admin';
+select count(worker_id) from worker where department='hr';
+select sum(salary) from worker where department='account';
+select avg(salary) from worker where department='account';
+select min(salary) from worker where department='admin' and first_name not like '%A%';
+SELECT*FROM worker where department = 'admin' 
+and first_name not like  '%a%'and salary = (select MIN(salary)from worker where department = 'admin');
+
+select worker_id as RollNumber from worker;
+select distinct(department) from worker;
+
+SELECT Worker_ID, First_name,
+CASE
+WHEN Salary > 300000 THEN 'Rich boy'
+WHEN Salary >= 100000 and salary<299999 THEN 'Middle class'
+ELSE 'Poor'
+
+END
+
+AS Status
+FROM Worker;
+
+
+create view minimumSalaryAdmin as select min(salary) from worker where department='admin';
+create view maximumSalaryAdmin as select max(salary) from worker where department='admin';
+select * from maximumSalaryAdmin;
