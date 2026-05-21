@@ -1,0 +1,80 @@
+show tables from vitcampus;
+use vitcampus;
+
+#ORDER BY -inc/dec, GROUP BY
+SELECT * FROM WORKER;
+SELECT First_name,department,salary from worker
+where department='admin' order by salary desc;
+
+SELECT count(worker_id) from worker where department='admin' or department='hr';
+SELECT Department,count(department) as Count from worker 
+group by department order by count(department) asc;
+SELECT Department,Sum(salary) from worker 
+group by department order by sum(salary) desc;
+
+# HAVING for WHERE for aggregate functions
+select department, count(department) from worker
+group by department having count(department)> 3 order by department asc;
+select department, sum(salary)
+from worker
+group by department
+having sum(salary) < 300000;
+
+#SUB-QUERY
+CREATE TABLE toppers(id int);
+INSERT INTO toppers value
+(2),
+(4),
+(5),
+(8);
+select * from worker limit 2 offset 3;
+select worker_id,first_name,department from worker
+where worker_id in(select id from toppers); 
+
+SELECT department, SUM(salary)
+FROM worker
+GROUP BY department
+ORDER BY SUM(salary) ASC
+LIMIT 2;
+
+SELECT department, SUM(salary)
+FROM worker
+GROUP BY department
+ORDER BY SUM(salary) ASC
+LIMIT 2;
+
+SELECT worker_id, first_name, salary FROM worker
+WHERE department = 'Admin'
+ORDER BY salary DESC 
+LIMIT 1 OFFSET 1;
+##
+SELECT first_name, department, salary
+FROM worker
+WHERE salary = (
+    SELECT DISTINCT salary
+    FROM worker AS sub_worker
+    WHERE sub_worker.department = worker.department
+    ORDER BY salary ASC
+    LIMIT 1 OFFSET 1
+);
+
+SELECT department, MIN(salary) AS second_lowest
+FROM worker
+WHERE salary > (
+    SELECT MIN(salary) 
+    FROM worker AS sub_worker 
+    WHERE sub_worker.department = worker.department
+)
+GROUP BY department;
+
+SELECT department, MIN(salary) AS lowest_salary
+FROM worker
+GROUP BY department;
+
+##
+Select dept, sum(sal)
+From worker 
+Group by dept 
+Order by sum(sal) asc
+Skip 1
+Limit 1;
