@@ -1,0 +1,468 @@
+db.sales.drop()
+true
+db.sales.insertMany([
+	{ _id  1, item  Americanos, price  5, size Short, quantity  22, date  ISODate(2022-01-15T080000Z) },
+	{ _id  2, item  Cappuccino, price  6, size Short,quantity  12, date  ISODate(2022-01-16T090000Z) },
+	{ _id  3, item  Lattes, price  15, size Grande,quantity  25, date  ISODate(2022-01-16T090500Z) },
+	{ _id  4, item  Mochas, price  25,size Tall, quantity  11, date  ISODate(2022-02-17T080000Z) },
+	{ _id  5, item  Americanos, price  10, size Grande,quantity  12, date  ISODate(2022-02-18T210600Z) },
+	{ _id  6, item  Cappuccino, price  7, size Tall,quantity  20, date  ISODate(2022-02-20T100700Z) },
+	{ _id  7, item  Lattes, price  25,size Tall, quantity  30, date  ISODate(2022-02-21T100800Z) },
+	{ _id  8, item  Americanos, price  10, size Grande,quantity  21, date  ISODate(2022-02-22T140900Z) },
+	{ _id  9, item  Cappuccino, price  10, size Grande,quantity  17, date  ISODate(2022-02-23T140900Z) },
+	{ _id  10, item  Americanos, price  8, size Tall,quantity  15, date  ISODate(2022-02-25T140900Z)}
+]);
+{
+  acknowledged true,
+  insertedIds {
+    '0' 1,
+    '1' 2,
+    '2' 3,
+    '3' 4,
+    '4' 5,
+    '5' 6,
+    '6' 7,
+    '7' 8,
+    '8' 9,
+    '9' 10
+  }
+}
+db.collection.getIndexes()
+MongoServerError[NamespaceNotFound] ns does not exist vitcampus.collection
+db.sales.getIndexes()
+[ { v 2, key { _id 1 }, name '_id_' } ]
+db.sales.createIndex({item 1})
+item_1
+db.sales.getIndexes()
+[
+  { v 2, key { _id 1 }, name '_id_' },
+  { v 2, key { item 1 }, name 'item_1' }
+]
+db.sales.updateOne(
+  { _id 1 },
+  { $set { saleCode S001 } }
+)
+
+db.sales.updateOne(
+  { _id 2 },
+  { $set { saleCode S002 } }
+)
+
+db.sales.updateOne(
+  { _id 3 },
+  { $set { saleCode S003 } }
+)
+
+db.sales.updateOne(
+  { _id 4 },
+  { $set { saleCode S004 } }
+)
+
+db.sales.updateOne(
+  { _id 5 },
+  { $set { saleCode S005 } }
+)
+
+db.sales.updateOne(
+  { _id 6 },
+  { $set { saleCode S006 } }
+)
+
+db.sales.updateOne(
+  { _id 7 },
+  { $set { saleCode S007 } }
+)
+
+db.sales.updateOne(
+  { _id 8 },
+  { $set { saleCode S008 } }
+)
+
+db.sales.updateOne(
+  { _id 9 },
+  { $set { saleCode S009 } }
+)
+
+db.sales.updateOne(
+  { _id 10 },
+  { $set { saleCode S010 } }
+)
+{
+  acknowledged true,
+  insertedId null,
+  matchedCount 1,
+  modifiedCount 1,
+  upsertedCount 0
+}
+db.sales.find(
+  {},
+  { _id 1, item 1, saleCode 1 }
+)
+{
+  _id 1,
+  item 'Americanos',
+  saleCode 'S001'
+}
+{
+  _id 2,
+  item 'Cappuccino',
+  saleCode 'S002'
+}
+{
+  _id 3,
+  item 'Lattes',
+  saleCode 'S003'
+}
+{
+  _id 4,
+  item 'Mochas',
+  saleCode 'S004'
+}
+{
+  _id 5,
+  item 'Americanos',
+  saleCode 'S005'
+}
+{
+  _id 6,
+  item 'Cappuccino',
+  saleCode 'S006'
+}
+{
+  _id 7,
+  item 'Lattes',
+  saleCode 'S007'
+}
+{
+  _id 8,
+  item 'Americanos',
+  saleCode 'S008'
+}
+{
+  _id 9,
+  item 'Cappuccino',
+  saleCode 'S009'
+}
+{
+  _id 10,
+  item 'Americanos',
+  saleCode 'S010'
+}
+db.sales.createIndex(
+  { saleCode 1 },
+  { unique true }
+)
+saleCode_1
+db.sales.getIndexes()
+[
+  { v 2, key { _id 1 }, name '_id_' },
+  { v 2, key { item 1 }, name 'item_1' },
+  { v 2, key { saleCode 1 }, name 'saleCode_1', unique true }
+]
+db.sales.insertOne({
+  _id 11,
+  item Espresso,
+  saleCode S001
+})
+MongoServerError E11000 duplicate key error collection vitcampus.sales index saleCode_1 dup key { saleCode S001 }
+db.users.insertMany([ 
+{  email   john@test.com ,  name   john }, 
+{  email   john@test.com ,  name   johny }, 
+{  email   jane@test.com ,  name   jane }, 
+])
+{
+  acknowledged true,
+  insertedIds {
+    '0' ObjectId('6a2421f0360d259b863b1672'),
+    '1' ObjectId('6a2421f0360d259b863b1673'),
+    '2' ObjectId('6a2421f0360d259b863b1674')
+  }
+}
+db .users.createIndex ({ email   1 },{ unique true}) 
+MongoServerError[DuplicateKey] Index build failed b49fa430-be5d-4dee-88b7-9a5ecbb61221 Collection vitcampus.users ( a11acbfd-1a49-4104-a7f7-fc64cafefe13 )  caused by  E11000 duplicate key error collection vitcampus.users index email_1 dup key { email john@test.com }
+db .users.deleteOne ({ name  'johny' , email  'john@test.com' }); 
+{
+  acknowledged true,
+  deletedCount 1
+}
+db .users.createIndex ({ email   1 },{ unique true})
+email_1
+ db  .locations.insertOne  ({ 
+ address    Downtown San Jose, CA, USA  , 
+ lat  37.335480  , 
+long - 121.893028 
+})
+{
+  acknowledged true,
+  insertedId ObjectId('6a2422bb360d259b863b1675')
+}
+db .locations.createIndex ({ 
+lat   1 , 
+long  1 
+},{  unique  true }); 
+lat_1_long_1
+db .locations.insertOne ({ 
+address   Dev Bootcamp, San Jose, CA, USA , 
+lat  37.335480 , 
+long - 122.893028 
+})
+{
+  acknowledged true,
+  insertedId ObjectId('6a2422e6360d259b863b1676')
+}
+db .locations.insertOne ({ 
+address   Central San Jose, CA, USA , 
+lat  37.335480 , 
+long - 121.893028 
+})
+MongoServerError E11000 duplicate key error collection vitcampus.locations index lat_1_long_1 dup key { lat 37.33548, long -121.893028 }
+db.sales.createIndex({  _id   1 ,  size   1  }) 
+_id _1_size_1
+ db.sales.createIndex({  price  1 ,  size   1  })
+price_1_size_1
+db.sales.find({ price10 ,  sizeGrande }).explain( 'executionStats' ); 
+{
+          size []
+        },
+        isUnique false,
+        isSparse false,
+        isPartial false,
+        indexVersion 2,
+        direction 'forward',
+        indexBounds {
+          price [
+            '[10, 10]'
+          ],
+          size [
+            '[Grande, Grande]'
+          ]
+        },
+        keysExamined 3,
+        seeks 1,
+        dupsTested 0,
+        dupsDropped 0,
+        peakTrackedMemBytes 0
+      }
+    }
+  },
+  queryShapeHash '35C2383D097F3A0830C5EEF092CA53210E02ED13803335890D38F4CFE9B1C2CB',
+  command {
+    find 'sales',
+    filter {
+      price 10,
+      size 'Grande'
+    },
+    '$db' 'vitcampus'
+  },
+  serverInfo {
+    host 'YOS',
+    port 27017,
+    version '8.3.2',
+    gitVersion '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters {
+    internalQueryFacetBufferSizeBytes 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS 0,
+    internalQueryMaxAddToSetBytes 104857600,
+    internalQueryFrameworkControl 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex 1
+  },
+  ok 1
+}
+db.sales.find({ price10 ,  sizeGrande })
+{
+  _id 5,
+  item 'Americanos',
+  price 10,
+  size 'Grande',
+  quantity 12,
+  date 2022-02-18T210600.000Z,
+  saleCode 'S005'
+}
+{
+  _id 8,
+  item 'Americanos',
+  price 10,
+  size 'Grande',
+  quantity 21,
+  date 2022-02-22T140900.000Z,
+  saleCode 'S008'
+}
+{
+  _id 9,
+  item 'Cappuccino',
+  price 10,
+  size 'Grande',
+  quantity 17,
+  date 2022-02-23T140900.000Z,
+  saleCode 'S009'
+}
+db.sales.find({ price10 }).explain( 'executionStats' );
+{
+      inputStage {
+        stage 'IXSCAN',
+        nReturned 3,
+        executionTimeMillisEstimate 0,
+        works 4,
+        advanced 3,
+        needTime 0,
+        needYield 0,
+        saveState 0,
+        restoreState 0,
+        isEOF 1,
+        nss 'vitcampus.sales',
+        keyPattern {
+          price 1,
+          size 1
+        },
+        indexName 'price_1_size_1',
+        isMultiKey false,
+        multiKeyPaths {
+          price [],
+          size []
+        },
+        isUnique false,
+        isSparse false,
+        isPartial false,
+        indexVersion 2,
+        direction 'forward',
+        indexBounds {
+          price [
+            '[10, 10]'
+          ],
+          size [
+            '[MinKey, MaxKey]'
+          ]
+        },
+        keysExamined 3,
+        seeks 1,
+        dupsTested 0,
+        dupsDropped 0,
+        peakTrackedMemBytes 0
+      }
+    }
+  },
+  queryShapeHash '7ACB83E1A4FD5115F914A643FDA3ED650550FA00786265B855D542C87840A17A',
+  command {
+    find 'sales',
+    filter {
+      price 10
+    },
+    '$db' 'vitcampus'
+  },
+  serverInfo {
+    host 'YOS',
+    port 27017,
+    version '8.3.2',
+    gitVersion '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters {
+    internalQueryFacetBufferSizeBytes 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS 0,
+    internalQueryMaxAddToSetBytes 104857600,
+    internalQueryFrameworkControl 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex 1
+  },
+  ok 1
+}
+db.sales.find({ sizeGrande }).explain( 'executionStats' );
+{
+    winningPlan {
+      isCached false,
+      stage 'COLLSCAN',
+      filter {
+        size {
+          '$eq' 'Grande'
+        }
+      },
+      nss 'vitcampus.sales',
+      direction 'forward'
+    },
+    rejectedPlans []
+  },
+  executionStats {
+    executionSuccess true,
+    nReturned 4,
+    executionTimeMillis 1,
+    totalKeysExamined 0,
+    totalDocsExamined 10,
+    executionStages {
+      isCached false,
+      stage 'COLLSCAN',
+      filter {
+        size {
+          '$eq' 'Grande'
+        }
+      },
+      nReturned 4,
+      executionTimeMillisEstimate 0,
+      works 11,
+      advanced 4,
+      needTime 6,
+      needYield 0,
+      saveState 0,
+      restoreState 0,
+      isEOF 1,
+      nss 'vitcampus.sales',
+      direction 'forward',
+      docsExamined 10
+    }
+  },
+  queryShapeHash 'BFAAB40588CEA2726DBC6D9BAA2C039A19220BDE24F2C895B4036B10218221AA',
+  command {
+    find 'sales',
+    filter {
+      size 'Grande'
+    },
+    '$db' 'vitcampus'
+  },
+  serverInfo {
+    host 'YOS',
+    port 27017,
+    version '8.3.2',
+    gitVersion '89f54eb32e217d2f7bfcad50e5919f3033bb9611'
+  },
+  serverParameters {
+    internalQueryFacetBufferSizeBytes 104857600,
+    internalDocumentSourceGroupMaxMemoryBytes 104857600,
+    internalQueryMaxBlockingSortMemoryUsageBytes 104857600,
+    internalDocumentSourceSetWindowFieldsMaxMemoryBytes 104857600,
+    internalQueryFacetMaxOutputDocSizeBytes 104857600,
+    internalLookupStageIntermediateDocumentMaxSizeBytes 104857600,
+    internalQueryProhibitBlockingMergeOnMongoS 0,
+    internalQueryMaxAddToSetBytes 104857600,
+    internalQueryFrameworkControl 'trySbeRestricted',
+    internalQueryPlannerIgnoreIndexWithCollationForRegex 1
+  },
+  ok 1
+}
+db .sales.getIndexes () 
+[
+  { v 2, key { _id 1 }, name '_id_' },
+  { v 2, key { item 1 }, name 'item_1' },
+  { v 2, key { saleCode 1 }, name 'saleCode_1', unique true },
+  { v 2, key { '_id ' 1, size 1 }, name '_id _1_size_1' },
+  { v 2, key { price 1, size 1 }, name 'price_1_size_1' }
+]
+db.sales.dropIndex( '_id _1_size_1')
+{ nIndexesWas 5, ok 1 }
+db .sales.getIndexes () 
+[
+  { v 2, key { _id 1 }, name '_id_' },
+  { v 2, key { item 1 }, name 'item_1' },
+  { v 2, key { saleCode 1 }, name 'saleCode_1', unique true },
+  { v 2, key { price 1, size 1 }, name 'price_1_size_1' }
+]
+db.sales.dropIndex({item 1})
+{ nIndexesWas 4, ok 1 }
+db.sales.dropIndexes ()
