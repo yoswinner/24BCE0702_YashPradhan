@@ -1,0 +1,249 @@
+rs.initiate({
+  _id: "myReplSet",
+  members: [
+    { _id: 0, host: "localhost:27017" },
+    { _id: 1, host: "localhost:27018" },
+    { _id: 2, host: "localhost:27019" }
+  ]
+})
+{
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1781015943, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1781015943, i: 1 })
+}
+rs.status()
+{
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 1,
+      name: 'localhost:27018',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 18,
+      optime: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeDate: 2026-06-09T14:39:15.000Z,
+      optimeDurableDate: 2026-06-09T14:39:15.000Z,
+      optimeWrittenDate: 2026-06-09T14:39:15.000Z,
+      lastAppliedWallTime: 2026-06-09T14:39:15.167Z,
+      lastDurableWallTime: 2026-06-09T14:39:15.167Z,
+      lastWrittenWallTime: 2026-06-09T14:39:15.167Z,
+      lastHeartbeat: 2026-06-09T14:39:21.091Z,
+      lastHeartbeatRecv: 2026-06-09T14:39:22.100Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27017',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    },
+    {
+      _id: 2,
+      name: 'localhost:27019',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 18,
+      optime: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeDurable: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeWritten: { ts: Timestamp({ t: 1781015955, i: 17 }), t: Long('1') },
+      optimeDate: 2026-06-09T14:39:15.000Z,
+      optimeDurableDate: 2026-06-09T14:39:15.000Z,
+      optimeWrittenDate: 2026-06-09T14:39:15.000Z,
+      lastAppliedWallTime: 2026-06-09T14:39:15.167Z,
+      lastDurableWallTime: 2026-06-09T14:39:15.167Z,
+      lastWrittenWallTime: 2026-06-09T14:39:15.167Z,
+      lastHeartbeat: 2026-06-09T14:39:21.091Z,
+      lastHeartbeatRecv: 2026-06-09T14:39:22.100Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27017',
+      syncSourceId: 0,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 1
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1781015955, i: 17 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1781015955, i: 17 })
+}
+use college
+switched to db college
+db.students.insertOne({
+  name: "Yash",
+  course: "MongoDB",
+  semester: 5
+})
+show dbs
+admin     80.00 KiB
+college    8.00 KiB
+config   136.00 KiB
+local    388.00 KiB
+use college
+db.students.find()
+switched to db college
+db.students.find()
+{
+  _id: ObjectId('6a2826426bb10cdd11ecec17'),
+  name: 'Yash',
+  course: 'MongoDB',
+  semester: 5
+}
+rs.status()
+{
+  set: 'myReplSet',
+  date: 2026-06-09T14:45:14.679Z,
+  myState: 1,
+  term: Long('2'),
+  syncSourceHost: '',
+  syncSourceId: -1,
+  heartbeatIntervalMillis: Long('2000'),
+  majorityVoteCount: 2,
+  writeMajorityCount: 2,
+  votingMembersCount: 3,
+  writableVotingMembersCount: 3,
+  optimes: {
+    lastCommittedOpTime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+    lastCommittedWallTime: 2026-06-09T14:45:14.547Z,
+    readConcernMajorityOpTime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+    appliedOpTime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+    durableOpTime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+    writtenOpTime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+    lastAppliedWallTime: 2026-06-09T14:45:14.547Z,
+    lastDurableWallTime: 2026-06-09T14:45:14.547Z,
+    lastWrittenWallTime: 2026-06-09T14:45:14.547Z
+  },
+  lastStableRecoveryTimestamp: Timestamp({ t: 1781016304, i: 1 }),
+  electionCandidateMetrics: {
+    lastElectionReason: 'stepUpRequestSkipDryRun',
+    lastElectionDate: 2026-06-09T14:44:54.517Z,
+    electionTerm: Long('2'),
+    lastCommittedOpTimeAtElection: { ts: Timestamp({ t: 1781016285, i: 1 }), t: Long('1') },
+    lastSeenWrittenOpTimeAtElection: { ts: Timestamp({ t: 1781016285, i: 1 }), t: Long('1') },
+    lastSeenOpTimeAtElection: { ts: Timestamp({ t: 1781016285, i: 1 }), t: Long('1') },
+    numVotesNeeded: 2,
+    priorityAtElection: 1,
+    electionTimeoutMillis: Long('10000'),
+    priorPrimaryMemberId: 0,
+    numCatchUpOps: Long('0'),
+    newTermStartDate: 2026-06-09T14:44:54.535Z,
+    wMajorityWriteAvailabilityDate: 2026-06-09T14:44:54.567Z
+  },
+  electionParticipantMetrics: {
+    votedForCandidate: true,
+    electionTerm: Long('1'),
+    lastVoteDate: 2026-06-09T14:39:15.030Z,
+    electionCandidateMemberId: 0,
+    voteReason: '',
+    lastWrittenOpTimeAtElection: { ts: Timestamp({ t: 1781015943, i: 1 }), t: Long('-1') },
+    maxWrittenOpTimeInSet: { ts: Timestamp({ t: 1781015943, i: 1 }), t: Long('-1') },
+    lastAppliedOpTimeAtElection: { ts: Timestamp({ t: 1781015943, i: 1 }), t: Long('-1') },
+    maxAppliedOpTimeInSet: { ts: Timestamp({ t: 1781015943, i: 1 }), t: Long('-1') },
+    priorityAtElection: 1
+  },
+  members: [
+    {
+      _id: 0,
+      name: 'localhost:27017',
+      health: 0,
+      state: 8,
+      stateStr: '(not reachable/healthy)',
+      uptime: 0,
+      optime: { ts: Timestamp({ t: 0, i: 0 }), t: Long('-1') },
+      optimeDurable: { ts: Timestamp({ t: 0, i: 0 }), t: Long('-1') },
+      optimeWritten: { ts: Timestamp({ t: 0, i: 0 }), t: Long('-1') },
+      optimeDate: 1970-01-01T00:00:00.000Z,
+      optimeDurableDate: 1970-01-01T00:00:00.000Z,
+      optimeWrittenDate: 1970-01-01T00:00:00.000Z,
+      lastAppliedWallTime: 2026-06-09T14:44:54.535Z,
+      lastDurableWallTime: 2026-06-09T14:44:54.535Z,
+      lastWrittenWallTime: 2026-06-09T14:44:54.535Z,
+      lastHeartbeat: 2026-06-09T14:45:12.849Z,
+      lastHeartbeatRecv: 2026-06-09T14:44:59.044Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: 'Error connecting to localhost:27017 (127.0.0.1:27017) :: caused by :: onInvoke :: caused by :: No connection could be made because the target machine actively refused it.',
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 2
+    },
+    {
+      _id: 1,
+      name: 'localhost:27018',
+      health: 1,
+      state: 1,
+      stateStr: 'PRIMARY',
+      uptime: 1100,
+      optime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+      optimeDate: 2026-06-09T14:45:14.000Z,
+      optimeWritten: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+      optimeWrittenDate: 2026-06-09T14:45:14.000Z,
+      lastAppliedWallTime: 2026-06-09T14:45:14.547Z,
+      lastDurableWallTime: 2026-06-09T14:45:14.547Z,
+      lastWrittenWallTime: 2026-06-09T14:45:14.547Z,
+      syncSourceHost: '',
+      syncSourceId: -1,
+      infoMessage: '',
+      electionTime: Timestamp({ t: 1781016294, i: 1 }),
+      electionDate: 2026-06-09T14:44:54.000Z,
+      configVersion: 1,
+      configTerm: 2,
+      self: true,
+      lastHeartbeatMessage: ''
+    },
+    {
+      _id: 2,
+      name: 'localhost:27019',
+      health: 1,
+      state: 2,
+      stateStr: 'SECONDARY',
+      uptime: 370,
+      optime: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+      optimeDurable: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+      optimeWritten: { ts: Timestamp({ t: 1781016314, i: 1 }), t: Long('2') },
+      optimeDate: 2026-06-09T14:45:14.000Z,
+      optimeDurableDate: 2026-06-09T14:45:14.000Z,
+      optimeWrittenDate: 2026-06-09T14:45:14.000Z,
+      lastAppliedWallTime: 2026-06-09T14:45:14.547Z,
+      lastDurableWallTime: 2026-06-09T14:45:14.547Z,
+      lastWrittenWallTime: 2026-06-09T14:45:14.547Z,
+      lastHeartbeat: 2026-06-09T14:45:14.654Z,
+      lastHeartbeatRecv: 2026-06-09T14:45:13.469Z,
+      pingMs: Long('0'),
+      lastHeartbeatMessage: '',
+      syncSourceHost: 'localhost:27018',
+      syncSourceId: 1,
+      infoMessage: '',
+      configVersion: 1,
+      configTerm: 2
+    }
+  ],
+  ok: 1,
+  '$clusterTime': {
+    clusterTime: Timestamp({ t: 1781016314, i: 1 }),
+    signature: {
+      hash: Binary.createFromBase64('AAAAAAAAAAAAAAAAAAAAAAAAAAA=', 0),
+      keyId: Long('0')
+    }
+  },
+  operationTime: Timestamp({ t: 1781016314, i: 1 })
+}
